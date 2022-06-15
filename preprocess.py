@@ -1,6 +1,8 @@
 # This script preprocess esoriginal pictures and turns them into 2D-projections.
 # The data is then used in create_labels.py.
 
+import os
+
 import numpy as np
 import cv2
 import glob
@@ -12,12 +14,13 @@ from slid import detect_lines
 from laps import LAPS
 from llr import LLR, llr_pad
 
-RAW_DATA_FOLDER = './data/raw/games/'
+RAW_DATA_FOLDER = './data/games/'
 PREPROCESSED_FOLDER = './data/preprocessed/games/'
 
 
 def preprocess_image(path, final_folder="", filename="",  save=False):
     ''' Reads and preprocesses image from [path] and saves it as [filename] in the [final_folder] is [save] is enabled.'''
+    print(path)
     res = cv2.imread(path)[..., ::-1]
     # Crop twice, just like Czyzewski et al. did
     for _ in range(2):
@@ -52,13 +55,14 @@ def preprocess_games(game_list):
     for game_name in game_list:
         for ver in ['orig', 'rev']:
             img_filename_list = []
-            folder_name = RAW_DATA_FOLDER + '%s/%s/*' % (game_name, ver)
-            for path_name in glob.glob(folder_name):
-                img_filename_list.append(path_name)
+            folder_name = RAW_DATA_FOLDER + '%s/%s' % (game_name, ver)
+            for path_name in os.listdir(folder_name):
+                path = folder_name + '/' + path_name
+                img_filename_list.append(path)
+            print(img_filename_list)
 
             count = 0
-            img_filename_list.sort(key=lambda s: int(
-                s.split('/')[-1].split('.')[0]))
+            img_filename_list.sort(key=lambda s: int(s.split('/')[-1].split('.')[0]))
             for path in img_filename_list:
                 count += 1
                 final_folder = PREPROCESSED_FOLDER + \
@@ -69,6 +73,5 @@ def preprocess_games(game_list):
 
 
 if __name__ == '__main__':
-    game_list = ['runau_schmidt', 'hewitt_steinitz', 'bertok_fischer', 'karpov_kasparov',
-                 'alekhine_nimzowitsch', 'rossolimo_reissmann', 'anderssen_dufresne', 'thorsteinsson_karlsson']
+    game_list = ['runau_schmidt', 'karpov_kasparov']
     preprocess_games(game_list)

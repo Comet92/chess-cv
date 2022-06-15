@@ -1,7 +1,7 @@
 from tensorflow.keras.optimizers import RMSprop
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.layers import *
-from tensorflow.python.keras.optimizer_v2.rmsprop import RMSProp
+#from tensorflow.python.keras.optimizer_v2.rmsprop import RMSProp
 
 # input
 model = Sequential()
@@ -21,6 +21,6 @@ model.add(Flatten())
 
 # output
 model.add(Dense(2, activation='softmax'))
-model.compile(RMSProp(learning_rate=0.001),
+model.compile(RMSprop(learning_rate=0.001),
               loss='categorical_crossentropy',
               metrics=['categorical_accuracy'])

@@ -164,6 +164,7 @@ if __name__ == '__main__':
         img = preprocess_image(IMAGE_PATH, save=False)
         arr = analyze_board(img)
         fen = board_to_fen(arr)
+        print(fen)
         fen_to_svg(fen)
         svg_to_png(infile=TEMP_SVG_FOLDER+'temp.SVG',
                    outfile=file_name)

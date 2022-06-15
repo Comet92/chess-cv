@@ -14,7 +14,7 @@ import json
 import os
 
 
-NUM_EPOCHS = 10
+NUM_EPOCHS = 5
 BATCH_SIZE = 16
 DATA_FOLDER = './data/CNN/'
 

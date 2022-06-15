@@ -128,10 +128,11 @@ def label_game(game_name, reversed=False):
     else:
         print('Finished labeling game "%s" (reversed)' % game_name)
 
-
 if __name__ == '__main__':
-    game_list = ['runau_schmidt', 'hewitt_steinitz', 'karpov_kasparov', 'bertok_fischer',
-                 'rossolimo_reissmann', 'anderssen_dufresne', 'thorsteinsson_karlsson', 'alekhine_nimzowitsch']
+    game_list = ['karpov_kasparov']
+    #'runau_schmidt', 'hewitt_steinitz']
+    #, 'karpov_kasparov', 'bertok_fischer']
+    #, 'rossolimo_reissmann', 'anderssen_dufresne', 'thorsteinsson_karlsson', 'alekhine_nimzowitsch']
     ver_list = ['orig', 'rev']
     for game_name in game_list:
         for ver in ver_list:
